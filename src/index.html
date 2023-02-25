@@ -24,12 +24,12 @@
           <a class="bg-purple-600 hover:bg-purple-500 btn-base" link-hook="/novnc">
             NoVNC
           </a>
-          <a class="bg-yellow-600 hover:bg-yellow-500 btn-base" link-hook="">
+          <a class="bg-yellow-600 hover:bg-yellow-500 btn-base" link-hook="/novnc_virtual">
             NoVNC (beta)
           </a>
         </div>
 
-        <a class="bg-green-600 hover:bg-green-500 btn-base mt-2" link-hook="/webssh">
+        <a class="bg-green-600 hover:bg-green-500 btn-base mt-2" link-hook="/webssh/ssh/host/127.0.0.1">
           WebSSH
         </a>
 
@@ -180,6 +180,16 @@
           <option value="newTab">Open new tab</option>
           <option value="currentTab">Replace current tab</option>
         </select>
+
+        <div class="flex mt-3 text-sm font-medium text-white mb-2">
+          <label for="update-frequency" class="block ">Stats
+            update
+            frequency</label>
+          <div class="flex-grow"></div>
+          <span id="update-frequency-label">2s</span>
+        </div>
+        <input id="update-frequency" type="range" min="1" max="15" value="5"
+          class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-700">
       </div>
     </div>
   </div>
@@ -212,8 +222,8 @@
       </button>
 
       <div
-        class="bg-zinc-800 shadow-xl ring-1 ring-gray-900/5 w-full rounded-lg px-3 py-2 text-gray-300 font-mono text-sm items-center flex">
-        <span id="iframe-path"></span>
+        class="bg-zinc-800 shadow-xl ring-1 ring-gray-900/5 overflow-clip w-full rounded-lg px-3 py-2 text-gray-300 font-mono text-sm items-center flex">
+        <span id="iframe-path">about:blank</span>
       </div>
 
       <button id="iframe-close" class="icon-btn">

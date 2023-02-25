@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
+  content: [
     "./src/**/*.{html,js,ts,jsx,tsx}",
   ],
   theme: {
@@ -9,6 +9,15 @@ module.exports = {
       screens: {
         xs: "500px",
         "buttonsok": "344px",
+      },
+      animation: {
+        "marquee": "marquee 10s linear infinite",
+      },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" },
+        }
       },
     },
   },
