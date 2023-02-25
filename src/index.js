@@ -84,7 +84,7 @@ frameReload.addEventListener("click", () => frame.contentWindow.location.reload(
 // start pinging http://localhost:8392/stats to get cpu/... stats
 const stats = document.getElementById("stats");
 const fetchStats = async () => {
-  const data = await (await fetch("/stats")).json();
+  const data = await (await fetch("/stats/")).json();
   const progressBar = (id, value, text) => {
     document.querySelector(`#status-${id}-text`).innerText = `${text} (${Math.round(value)}%)`;
     document.querySelector(`#status-${id}-bar`).style.width = `${value}%`;
