@@ -1,0 +1,234 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="apple-touch-icon" href="assets/icon.png">
+  <meta name="apple-mobile-web-app-title" content="MooPi">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <title>MooPi</title>
+  <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body class="w-screen h-screen bg-zinc-900 flex items-center justify-center">
+  <div class="h-full w-full m-0 p-0 flex items-center justify-center flex-col xs:max-w-md space-y-1.5">
+    <h1 class="text-[26px] font-bold text-white w-full translate-y-1.5 text-center xs:text-left">MooPi Dashboard</h1>
+
+    <div class="bg-zinc-800 shadow-xl ring-1 ring-gray-900/5 w-full xs:rounded-lg p-6">
+      <div class="text-base text-gray-100 flex flex-col">
+        <h4 class="card-subtitle">Services</h4>
+        <div class="flex buttonsok:space-x-2 buttonsok:space-y-0 space-y-2 flex-col buttonsok:flex-row">
+          <a class="bg-purple-600 hover:bg-purple-500 btn-base" link-hook="/novnc">
+            NoVNC
+          </a>
+          <a class="bg-yellow-600 hover:bg-yellow-500 btn-base" link-hook="">
+            NoVNC (beta)
+          </a>
+        </div>
+
+        <a class="bg-green-600 hover:bg-green-500 btn-base mt-2" link-hook="/webssh">
+          WebSSH
+        </a>
+
+        <h4 class="card-subtitle mt-4">Admin</h4>
+
+        <a class="bg-red-600 hover:bg-red-500 btn-base" link-hook="/raspap">
+          RaspAP
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-zinc-800 shadow-xl ring-1 ring-gray-900/5 w-full xs:rounded-lg p-6">
+      <div class="text-base text-gray-100 flex flex-col">
+
+        <div class="flex">
+          <h4 class="card-subtitle">System Status</h4>
+          <div class="flex-grow"></div>
+          <span class="flex w-2 h-2 bg-green-200 rounded-full animate-pulse"></span>
+        </div>
+
+        <div role="status" class="max-w-sm animate-pulse mt-1" id="system-status-skeleton">
+          <div class="h-2 bg-gray-200 rounded-full dark:bg-zinc-700 max-w-[360px] mb-2.5"></div>
+          <div class="h-2 bg-gray-200 rounded-full dark:bg-zinc-700 mb-2.5"></div>
+          <div class="h-2 bg-gray-200 rounded-full dark:bg-zinc-700 max-w-[330px] mb-2.5"></div>
+          <div class="h-2 bg-gray-200 rounded-full dark:bg-zinc-700 max-w-[300px] mb-2.5"></div>
+          <span class="sr-only">Loading...</span>
+        </div>
+
+        <div class="hidden items-center mt-1 justify-center" id="system-status-container">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.25"
+            stroke="currentColor" class="w-[17px] h-[17px]">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" />
+          </svg>
+
+          <div id="status-cpu-text" class="text-zinc-200 text-[11px] font-semibold font-mono mr-3 ml-2 leading-3 w-20">
+            CPU (0%)</div>
+          <div class="rounded-full h-1.5 bg-zinc-700 flex-grow">
+            <div id="status-cpu-bar" class="bg-purple-500 h-1.5 rounded-full" style="width: 0%"></div>
+          </div>
+        </div>
+
+
+
+        <div class="hidden items-center mt-2 justify-center" id="system-status-container">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.25"
+            stroke="currentColor" class="w-[17px] h-[17px]">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21.75 17.25v-.228a4.5 4.5 0 00-.12-1.03l-2.268-9.64a3.375 3.375 0 00-3.285-2.602H7.923a3.375 3.375 0 00-3.285 2.602l-2.268 9.64a4.5 4.5 0 00-.12 1.03v.228m19.5 0a3 3 0 01-3 3H5.25a3 3 0 01-3-3m19.5 0a3 3 0 00-3-3H5.25a3 3 0 00-3 3m16.5 0h.008v.008h-.008v-.008zm-3 0h.008v.008h-.008v-.008z" />
+          </svg>
+
+
+          <div id="status-disk-text" class="text-zinc-200 text-[11px] font-semibold font-mono mr-3 ml-2 leading-3 w-20">
+            Disk (0%)</div>
+          <div class="rounded-full h-1.5 bg-zinc-700 flex-grow">
+            <div id="status-disk-bar" class="bg-purple-500 h-1.5 rounded-full" style="width: 0%"></div>
+          </div>
+        </div>
+
+
+        <div class="hidden items-center mt-2 justify-center" id="system-status-container">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.25"
+            stroke="currentColor" class="w-[17px] h-[17px]">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3" />
+          </svg>
+
+
+
+          <div id="status-ram-text" class="text-zinc-200 text-[11px] font-semibold font-mono mr-3 ml-2 leading-3 w-20">
+            RAM
+            (0%)</div>
+          <div class="rounded-full h-1.5 bg-zinc-700 flex-grow">
+            <div id="status-ram-bar" class="bg-purple-500 h-1.5 rounded-full" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="hidden items-center mt-1 justify-center" id="system-status-container">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.25"
+            stroke="currentColor" class="w-[17px] h-[17px]">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+
+          <div id="status-swap-text" class="text-zinc-200 text-[11px] font-semibold font-mono mr-3 ml-2 leading-3 w-20">
+            Uptime
+          </div>
+
+          <div id="status-uptime-text" class="text-zinc-200 text-[11px] font-semibold font-mono flex-grow">
+            NaN minutes
+          </div>
+
+        </div>
+
+        <h4 class="card-subtitle mt-4">Network Status</h4>
+        <div class="flex"></div>
+
+        <div role="status" class="max-w-sm animate-pulse mt-1" id="system-status-skeleton">
+          <div class="h-2 bg-gray-200 rounded-full dark:bg-zinc-700 max-w-[360px] mb-2.5"></div>
+          <div class="h-2 bg-gray-200 rounded-full dark:bg-zinc-700 mb-2.5"></div>
+          <div class="h-2 bg-gray-200 rounded-full dark:bg-zinc-700 max-w-[330px] mb-2.5"></div>
+          <span class="sr-only">Loading...</span>
+        </div>
+
+        <div class="flex items-center mt-1 justify-center flex-col" id="net-template-container">
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- settings button fixed to bottom right (toggles a whole-window popup) -->
+  <div class="fixed bottom-0 right-0 m-4">
+    <button id="toggle-settings"
+      class="bg-zinc-800 hover:bg-zinc-700 shadow-xl text-zinc-200 ring-1 ring-gray-900/5 rounded-lg p-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- wholescreen overlay settings menu (option to pick tab opening method) -->
+  <div id="settings-menu"
+    class="hidden fixed w-screen h-screen top-0 left-0 bg-zinc-900 items-center justify-center flex-col p-4 z-40">
+    <!-- card -->
+    <div class="flex w-full max-w-md items-center mb-1">
+      <span class="text-zinc-200 text-xl font-bold">Settings</span>
+      <div class="flex-grow"></div>
+      <button id="toggle-settings"
+        class="bg-zinc-800 hover:bg-zinc-700 shadow-xl text-zinc-200 ring-1 ring-gray-900/5 rounded-lg p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div class="bg-zinc-800 shadow-xl ring-1 ring-gray-900/5 w-full rounded-lg p-6 max-w-md">
+      <div class="text-base text-gray-100 flex flex-col">
+        <!-- radio buttons with options (IFrame|New Tab|Current Tab) -->
+        <label for="tab-open-method" class="block mb-2 text-sm font-medium text-white">Tab opening method</label>
+        <select id="tab-open-method"
+          class="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-zinc-700 border-zinc-600 placeholder-gray-400 text-white">
+          <option value="frame">Open in iframe</option>
+          <option value="newTab">Open new tab</option>
+          <option value="currentTab">Replace current tab</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- wholescreen iframe with a navbar -->
+  <div id="iframe-container"
+    class="hidden fixed w-screen h-screen top-0 left-0 bg-zinc-900 items-center justify-center flex-col p-4 z-50">
+    <div class="flex w-full space-x-1 mb-2">
+      <button id="iframe-back" class="icon-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+
+      </button>
+
+      <button id="iframe-forward" class="icon-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+
+      </button>
+      <button id="iframe-reload" class="icon-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+        </svg>
+      </button>
+
+      <div
+        class="bg-zinc-800 shadow-xl ring-1 ring-gray-900/5 w-full rounded-lg px-3 py-2 text-gray-300 font-mono text-sm items-center flex">
+        <span id="iframe-path"></span>
+      </div>
+
+      <button id="iframe-close" class="icon-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <iframe id="iframe-frame" class="w-full h-full rounded-lg"></iframe>
+  </div>
+
+
+
+  <script src="./index.js"></script>
+</body>
+
+</html>

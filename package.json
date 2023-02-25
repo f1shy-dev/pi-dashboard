@@ -1,0 +1,15 @@
+{
+  "name": "source_code",
+  "version": "1.0.0",
+  "source": "src/index.html",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel": "^2.8.3",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7"
+  },
+  "scripts": {
+    "dev": "parcel",
+    "build": "rm -rf dist .parcel-cache && parcel build --no-source-maps"
+  }
+}
