@@ -2,7 +2,6 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="icon" href="assets/favicon.ico">
   <link rel="apple-touch-icon" href="assets/icon.png">
   <meta name="apple-mobile-web-app-title" content="MooPi">
@@ -21,7 +20,7 @@
       <div class="text-base text-gray-100 flex flex-col">
         <h4 class="card-subtitle">Services</h4>
         <div class="flex buttonsok:space-x-2 buttonsok:space-y-0 space-y-2 flex-col buttonsok:flex-row">
-          <a class="bg-purple-600 hover:bg-purple-500 btn-base" link-hook="/novnc">
+          <a class="bg-purple-600 hover:bg-purple-500 btn-base" link-hook="/novnc/vnc.html">
             NoVNC
           </a>
           <a class="bg-yellow-600 hover:bg-yellow-500 btn-base" link-hook="/novnc_virtual">
@@ -66,13 +65,13 @@
           </svg>
 
           <div id="status-cpu-text" class="text-zinc-200 text-[11px] font-semibold font-mono mr-3 ml-2 leading-3 w-20">
-            CPU (0%)</div>
+            CPU (0%)
+          </div>
+          <div id="temperature"></div>
           <div class="rounded-full h-1.5 bg-zinc-700 flex-grow">
             <div id="status-cpu-bar" class="bg-purple-500 h-1.5 rounded-full" style="width: 0%"></div>
           </div>
         </div>
-
-
 
         <div class="hidden items-center mt-2 justify-center" id="system-status-container">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.25"
@@ -107,14 +106,38 @@
           </div>
         </div>
 
+
         <div class="hidden items-center mt-1 justify-center" id="system-status-container">
+
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.25"
+            stroke="currentColor" class="w-[17px] h-[17px]">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+          </svg>
+
+
+          <div id="status-temp-label"
+            class="text-zinc-200 text-[11px] font-semibold font-mono mr-3 ml-2 leading-3 w-20">
+            Temperature
+          </div>
+
+          <div id="status-temp-text" class="text-zinc-200 text-[11px] font-semibold font-mono flex-grow">
+            00.0C
+          </div>
+
+        </div>
+
+        <div class="hidden items-center justify-center" id="system-status-container">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.25"
             stroke="currentColor" class="w-[17px] h-[17px]">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
 
 
-          <div id="status-swap-text" class="text-zinc-200 text-[11px] font-semibold font-mono mr-3 ml-2 leading-3 w-20">
+          <div id="status-uptime-label"
+            class="text-zinc-200 text-[11px] font-semibold font-mono mr-3 ml-2 leading-3 w-20">
             Uptime
           </div>
 

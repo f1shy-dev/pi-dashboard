@@ -4,19 +4,34 @@ const express = require('express');
 const app = express();
 const port = 8392;
 const osu = require('node-os-utils');
-// use node-os-utils and make a stats endpoint with cpu, mem, ram, disk, network and temp stats in a json format, and also a / with a simple hello world
+const { exec } = require('child_process');
+const getTemp = async () => {
+    // run command `vcgencmd measure_temp` with exec async
+    const { stdout, stderr } = await new Promise((resolve, reject) => {
+        exec('vcgencmd measure_temp', (err, stdout, stderr) => {
+            if (err) return reject(err);
+            resolve({ stdout, stderr });
+        });
+    });
+
+    //output is like temp=32.1'C, parse to return 32.1
+    return parseFloat(stdout.split('=')[1].split("'")[0]);
+};
+
+
 app.get('/stats', async (req, res) => {
     // const cpu = await osu.cpu.usage();
     // const mem = await osu.mem.info();
     // const disk = await osu.drive.info();
     // const network = await osu.netstat.inOut();
     // rewrite the above to use Promise.all
-    const [cpu, mem, disk, network, uptime] = await Promise.all([
+    const [cpu, mem, disk, network, uptime, temp] = await Promise.all([
         osu.cpu.usage(),
         osu.mem.info(),
         osu.drive.info(),
         osu.netstat.inOut(),
         osu.os.uptime(),
+        getTemp()
     ]);
 
     // console.log(cpu, mem, disk, network, uptime)
@@ -27,7 +42,8 @@ app.get('/stats', async (req, res) => {
         mem,
         disk,
         network,
-        uptime
+        uptime,
+        temp
     });
 });
 

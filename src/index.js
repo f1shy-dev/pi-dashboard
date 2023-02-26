@@ -26,7 +26,8 @@ const getOpeningMethod = () => {
   const openOption = localStorage.getItem("openOption");
   if (openOption !== "" && openOption !== null) return openOption;
   if (window.matchMedia("(display-mode: standalone)").matches) return "frame";
-  return "newTab";
+  //default is now frame, i guess
+  return "frame";
 };
 
 const openFrame = (url) => {
@@ -99,6 +100,8 @@ const fetchStats = async () => {
   const days = Math.floor(data.uptime / 60 / 60 / 24);
   const newUptime = `${days}d ${hours}h ${minutes}m ${Math.round(seconds)}s`;
   document.getElementById("status-uptime-text").innerText = newUptime;
+
+  document.getElementById("status-temp-text").innerHTML = `${data.temp}&deg;C`;
 
   const interfaces = Object.keys(data.network).filter((i) => i !== "total" && i !== "lo");
 
